@@ -1,0 +1,56 @@
+package MethodsLab;
+
+import java.util.Scanner;
+
+public class P05Orders {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String product = scanner.nextLine();
+        int quantity = Integer.parseInt(scanner.nextLine());
+        double price = 0;
+
+        switch (product) {
+            case "coffee":
+                price = 1.50;
+                System.out.printf("%.2f",coffeePrice(price, quantity));
+                break;
+
+            case "water":
+                price = 1.00;
+                System.out.printf("%.2f",waterPrice(price, quantity));
+                break;
+
+            case "coke":
+                price = 1.40;
+                System.out.printf("%.2f",cokePrice(price, quantity));
+                break;
+
+            case "snacks":
+                price = 2.00;
+                System.out.printf("%.2f",snacksPrice(price, quantity));
+                break;
+
+
+        }
+    }
+    public static double coffeePrice(double price, double quantity) {
+
+        return price * quantity;
+    }
+
+    public static double waterPrice(double price, double quantity) {
+
+        return price * quantity;
+    }
+
+    public static double cokePrice(double price, double quantity) {
+
+        return price * quantity;
+    }
+
+    public static double snacksPrice(double price, double quantity) {
+
+        return  price * quantity;
+    }
+}
