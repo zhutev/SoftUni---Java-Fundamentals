@@ -1,0 +1,26 @@
+package MethodsLab;
+
+import java.util.Scanner;
+
+public class P07RepeatString {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String textInput = scanner.nextLine();
+        int rotationsInput = Integer.parseInt(scanner.nextLine());
+
+        String resultTextInput = repeatString(rotationsInput, textInput);
+
+        System.out.println(resultTextInput);
+    }
+
+    public static String repeatString(int rotations, String text) {
+        StringBuilder textResult = new StringBuilder();
+
+        for (int i = 1; i <= rotations; i++) {
+            textResult.append(text);
+        }
+
+        return textResult.toString();
+    }
+}
