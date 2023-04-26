@@ -1,0 +1,46 @@
+package MethodsLab;
+
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.util.Scanner;
+
+public class P11MathOperations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int firstNumInput = Integer.parseInt(scanner.nextLine());
+        String operator = scanner.nextLine();
+        int secondNumInput = Integer.parseInt(scanner.nextLine());
+
+        double result = calculatedSum(firstNumInput, operator, secondNumInput);
+
+        DecimalFormat decimalFormat = new DecimalFormat("0.##");
+
+        System.out.println(decimalFormat.format(result));
+    }
+
+    public static double calculatedSum(double firstNum, String operator, double secondNum) {
+        double result = 0.0;
+
+        switch (operator) {
+
+            case "/":
+                result = firstNum / secondNum;
+                break;
+
+            case "*":
+                result = firstNum * secondNum;
+                break;
+
+            case "+":
+                result = firstNum + secondNum;
+                break;
+
+            case "-":
+                result = firstNum - secondNum;
+                break;
+        }
+
+        return result;
+    }
+}
