@@ -1,0 +1,36 @@
+package MethodsLab;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class P10MultiplyEvensByOdds {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int inputNumber = Math.abs(Integer.parseInt(scanner.nextLine()));
+
+        System.out.println(evenAndOddSum(inputNumber));
+
+    }
+
+    public static int evenAndOddSum(int number) {
+        int evenSum = 0;
+        int oddSum = 0;
+
+        while (number > 0) {
+            int currentNum = number % 10;
+
+            if (currentNum % 2 == 0) {
+                evenSum += currentNum;
+
+            } else {
+                oddSum += currentNum;
+            }
+
+            number = number / 10;
+        }
+
+        return evenSum * oddSum;
+    }
+}
