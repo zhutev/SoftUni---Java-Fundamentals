@@ -1,0 +1,33 @@
+package MethodsExercise;
+
+import java.util.Scanner;
+
+public class P03CharactersInRange {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        char firstChar = scanner.nextLine().charAt(0);
+        char secondChar = scanner.nextLine().charAt(0);
+
+        printAllChars(firstChar, secondChar);
+    }
+
+    public static void printAllChars(char firstSymbol, char secondSymbol) {
+
+        //проверка кой е по-малкия символ -> започвам от по-малкия
+        if (firstSymbol < secondSymbol) {
+            for (int i = firstSymbol + 1; i < secondSymbol; i++) {
+
+                System.out.print((char) i + " ");
+
+            }
+
+        } else {
+            for (int i = secondSymbol + 1; i < firstSymbol; i++) {
+
+                System.out.print((char) i + " ");
+
+            }
+        }
+    }
+}
