@@ -1,0 +1,29 @@
+package MethodsExercise;
+
+import java.util.Scanner;
+
+public class P02VowelsCount {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String textInput = scanner.nextLine();
+
+        printVowelsCount(textInput);
+
+    }
+
+    public static void printVowelsCount (String text) {
+
+        int count = 0;
+        String textToLowerCase = text.toLowerCase();
+
+        for (int i = 0; i <= textToLowerCase.length() - 1 ; i++) {
+            char letter = textToLowerCase.charAt(i);
+
+            if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u') {
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+}
