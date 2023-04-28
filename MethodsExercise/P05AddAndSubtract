@@ -1,0 +1,30 @@
+package MethodsExercise;
+
+import java.util.Scanner;
+
+public class P05AddAndSubtract {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int firstInt = Integer.parseInt(scanner.nextLine());
+        int secondInt = Integer.parseInt(scanner.nextLine());
+        int thirdInt = Integer.parseInt(scanner.nextLine());
+
+        int sumResult = sumOfFirstAndSecondInt(firstInt, secondInt);
+        int subtractResult = subtractByThirdInt(sumResult, thirdInt);
+
+        System.out.println(subtractResult);
+
+
+    }
+
+    public static int sumOfFirstAndSecondInt (int one, int two) {
+
+        return one + two;
+    }
+
+    public static int subtractByThirdInt (int sumResult, int thirdInt) {
+
+        return sumResult - thirdInt;
+    }
+}
