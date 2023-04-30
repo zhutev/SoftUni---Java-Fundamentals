@@ -1,0 +1,55 @@
+package ListsLab;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class P04ListManipulationBasics {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        List<Integer> numbersList = Arrays.stream(scanner.nextLine().split(" "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        String input = scanner.nextLine();
+
+        while (!input.equals("end")) {
+            String[] commandArr = input.split(" ");
+            String command = commandArr[0];
+
+            switch (command) {
+                case "Add":
+                    int numberToAdd = Integer.parseInt(commandArr[1]);
+                    numbersList.add(numberToAdd);
+                    break;
+
+                case "Remove":
+                    int numberToRemove = Integer.parseInt(commandArr[1]);
+                    numbersList.remove(Integer.valueOf(numberToRemove));
+                    // използваме Integer.valueOf, за да превърнем числото в референтен тип данни, какъвто е листа,
+                    // за да не се бърка компилатора и да премахне въведеното число, а не индекс!
+                    break;
+
+                case "RemoveAt":
+                    int indexToRemoveAt = Integer.parseInt(commandArr[1]);
+                    numbersList.remove(indexToRemoveAt);
+                    break;
+
+                case "Insert":
+                    int numberToInsert = Integer.parseInt(commandArr[1]);
+                    int indexToInsert = Integer.parseInt(commandArr[2]);
+                    numbersList.add(indexToInsert, numberToInsert);
+                    break;
+
+            }
+
+            input = scanner.nextLine();
+
+        }
+
+        System.out.println(numbersList.toString().replaceAll("[\\[\\],]", ""));
+        // превръщаме листа в Стринг и премахваме [ ] скобите и , запетаята при принтирането!
+    }
+}
