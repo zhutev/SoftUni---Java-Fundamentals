@@ -1,0 +1,101 @@
+package ListsExercise;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class P10SoftUniCoursePlanning {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        List<String> lessons = Arrays.stream(scanner.nextLine().split(",\\s+")).collect(Collectors.toList());
+
+        String commands = scanner.nextLine();
+        while (!commands.equals("course start")) {
+            String[] enteredText = commands.split(":");
+            String currentCommand = enteredText[0];
+            String lessonTitle = enteredText[1];
+
+            switch (currentCommand) {
+                case "Add":
+                    if (!lessons.contains(lessonTitle)) {
+                        lessons.add(lessonTitle);
+                    }
+                    break;
+
+                case "Insert":
+                    int index = Integer.parseInt(commands.split(":")[2]);
+                    if (!lessons.contains(lessonTitle)) {
+                        lessons.add(index, lessonTitle);
+                    }
+                    break;
+
+                case "Remove":
+                    if (lessons.contains(lessonTitle)) {
+                        lessons.remove(lessonTitle);
+                    }
+                    int indexOfLesson = lessons.indexOf(lessonTitle);
+                    if (lessons.get(indexOfLesson + 1).equals(lessonTitle + "-Exercise")) {
+                        lessons.remove(indexOfLesson + 1);
+
+                    }
+                    break;
+
+                case "Swap":
+                    String lessonTitle2 = commands.split(":")[2];
+                    if (lessons.contains(lessonTitle) && lessons.contains(lessonTitle2)) {
+                        int indexLesson1 = lessons.indexOf(lessonTitle);
+                        int indexLesson2 = lessons.indexOf(lessonTitle2);
+                        lessons.set(indexLesson1, lessonTitle2);
+                        lessons.set(indexLesson2, lessonTitle);
+
+                        String exOne = lessonTitle + "-Exercise";
+                        String exTwo = lessonTitle2 + "-Exercise";
+
+                        if (lessons.contains(exOne)) {
+                            lessons.remove(lessons.indexOf(exOne));
+                            lessons.add(lessons.indexOf(lessonTitle + 1), exOne);
+                        }
+                        if (lessons.contains(exTwo)) {
+                            lessons.remove(lessons.indexOf(exTwo));
+                            lessons.add(lessons.indexOf(lessonTitle2) + 1, exTwo);
+                        }
+                    }
+                    break;
+
+                case "Exercise":
+                    String exercise = lessonTitle + "-Exercise";
+                    int indexOfLessonTitle = lessons.indexOf(lessonTitle);
+
+                    if (lessons.contains(lessonTitle)) {
+                        if (indexOfLessonTitle == lessons.size() - 1) {
+                            lessons.add(indexOfLessonTitle + 1, exercise);
+
+                        } else if (!lessons.get(indexOfLessonTitle + 1).equals(exercise)) {
+                            lessons.add(indexOfLessonTitle + 1, exercise);
+                        }
+                    } else {
+                        lessons.add(lessonTitle);
+                        lessons.add(exercise);
+                    }
+                    break;
+
+            }
+
+
+            commands = scanner.nextLine();
+        }
+
+        printList(lessons);
+    }
+
+    private static void printList (List<String> lessonsList) {
+        int count = 1;
+        for (String element : lessonsList) {
+            System.out.println(count + "." + element);
+            count++;
+        }
+    }
+}
