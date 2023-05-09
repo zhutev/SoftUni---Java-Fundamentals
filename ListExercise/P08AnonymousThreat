@@ -1,0 +1,80 @@
+package ListsExercise;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class P08AnonymousThreat {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String namesInput = scanner.nextLine();
+
+        List<String> listOfStrings = Arrays.stream(namesInput.split("\\s+")).collect(Collectors.toList());
+
+        String command = scanner.nextLine();
+        while (!command.equals("3:1")) {
+            String currentCommand = command.split("\\s+")[0];
+
+            if (currentCommand.contains("merge")) {
+                int startIndex = Integer.parseInt(command.split("\\s+")[1]);
+                int endIndex = Integer.parseInt(command.split("\\s+")[2]);
+
+                if (startIndex < 0) {
+                    startIndex = 0;
+                }
+                if (endIndex > listOfStrings.size() - 1) {
+                    endIndex = listOfStrings.size() - 1;
+                }
+                boolean startIndexIsValid = isValidIndex(startIndex, listOfStrings.size());
+                boolean endIndexIsValid = isValidIndex(endIndex, listOfStrings.size());
+
+                if (startIndexIsValid && endIndexIsValid) {
+                    StringBuilder resultMerge = new StringBuilder();
+                    for (int i = startIndex; i <= endIndex ; i++) {
+                        resultMerge.append(listOfStrings.get(i));
+                        
+                    }
+
+                    for (int i = startIndex; i <= endIndex; i++) {
+                        listOfStrings.remove(startIndex);
+                    }
+
+                    listOfStrings.add(startIndex, resultMerge.toString());
+                }
+
+            } else if (currentCommand.contains("divide")) {
+                int index = Integer.parseInt(command.split("\\s+")[1]);
+                int partitions = Integer.parseInt(command.split("\\s+")[2]);
+
+                String elementForDivide = listOfStrings.get(index);
+                listOfStrings.remove(index);
+
+                int dividingParts = elementForDivide.length() / partitions;
+                int begin = 0;
+
+                for (int i = 1; i < partitions; i++) {
+                    listOfStrings.add(index, elementForDivide.substring(begin, begin + dividingParts));
+                    index++;
+                    begin += dividingParts;
+                    
+                }
+
+                listOfStrings.add(index, elementForDivide.substring(begin));
+
+            }
+
+            command = scanner.nextLine();
+
+        }
+
+        System.out.println(String.join(" ", listOfStrings));
+    }
+
+    public static boolean isValidIndex (int index, int size) {
+
+        return index >= 0 && index <= size - 1;
+    }
+}
