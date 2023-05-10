@@ -1,0 +1,21 @@
+package ObjectsAndClassesLAB;
+
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class P03BigFactorial {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int N = Integer.parseInt(scanner.nextLine());;
+
+        BigInteger resultBigNum = new BigInteger(String.valueOf(1));
+
+        for (int i = 1; i <= N; i++) {
+            resultBigNum = resultBigNum.multiply(BigInteger.valueOf(i));
+
+        }
+
+        System.out.println(resultBigNum);
+    }
+}
