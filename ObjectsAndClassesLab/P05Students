@@ -1,0 +1,69 @@
+package ObjectsAndClassesLAB;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class P05Students {
+    static class Student {
+        private String firstName;
+        private String lastName;
+        private int age;
+        private String homeTown;
+
+        public Student(String firstName, String lastName, int age, String homeTown) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
+            this.homeTown = homeTown;
+
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public String getHomeTown() {
+            return homeTown;
+        }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        List<Student> studentsList = new ArrayList<>();
+
+        String inputLine = scanner.nextLine();
+        while (!inputLine.equals("end")) {
+            String[] studentData = inputLine.split("\\s+");
+
+            String firstName = studentData[0];
+            String lastName = studentData[1];
+            int age = Integer.parseInt(studentData[2]);
+            String homeTown = studentData[3];
+
+            Student currentStudent = new Student(firstName, lastName, age, homeTown);
+
+            studentsList.add(currentStudent);
+
+            inputLine = scanner.nextLine();
+        }
+
+        String hometown = scanner.nextLine();
+
+        for (Student element : studentsList) {
+            if (element.getHomeTown().equals(hometown)) {
+                System.out.printf("%s %s is %d years old%n", element.getFirstName(), element.getLastName(), element.getAge());
+            }
+
+        }
+
+    }
+}
