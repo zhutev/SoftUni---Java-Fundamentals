@@ -1,0 +1,18 @@
+package ObjectsAndClassesLAB;
+
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class P02SumBigNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        BigInteger numberOne = new BigInteger(scanner.nextLine());
+        BigInteger numberTwo = new BigInteger(scanner.nextLine());
+
+        BigInteger sumNumbers = numberOne.add(numberTwo);
+
+
+        System.out.println(sumNumbers);
+    }
+}
