@@ -1,0 +1,25 @@
+package ObjectsAndClassesEXERCISE.P03OpinionPoll;
+
+public class Person {
+    // полета -> характеристики на класа
+    private String name;
+    private int age;
+
+    // конструктор -> с него създаваме обекти от класа
+    public Person(String name, int age) {
+        // създавам нов обект
+        this.name = name;
+        this.age = age;
+    }
+
+
+    // методи -> поведението на обекта от класа
+    // getter -> метод, чрез който достъпваме стойността на поле (в случая name или age)
+    public String getName() {
+        return this.name;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+}
