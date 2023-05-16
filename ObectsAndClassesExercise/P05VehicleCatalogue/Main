@@ -1,0 +1,72 @@
+package ObjectsAndClassesEXERCISE.P05VehicleCatalogue;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        List<Vehichle> catalogue = new ArrayList<>();
+
+        String input = scanner.nextLine();
+        while (!input.equals("End")) {
+            String[] data = input.split("\\s+");
+            String typeOfVehicle = data[0];
+            String model = data[1];
+            String color = data[2];
+            int horsePower = Integer.parseInt(data[3]);
+
+            Vehichle currentVehichle = new Vehichle(typeOfVehicle, model, color, horsePower);
+
+            catalogue.add(currentVehichle);
+
+            input = scanner.nextLine();
+        }
+
+
+        String inputModel = scanner.nextLine();
+
+        double sumCars = 0;
+        double sumTrucks = 0;
+        int countCars = 0;
+        int countTrucks = 0;
+
+        while (!inputModel.equals("Close the Catalogue")) {
+            for (Vehichle vehicle : catalogue) {
+                if (vehicle.getModel().equals(inputModel)) {
+                    System.out.println(vehicle);
+
+                }
+            }
+
+
+            inputModel = scanner.nextLine();
+        }
+
+        for (Vehichle vehichle : catalogue) {
+            if (vehichle.getTypeOfVehicle().equals("car")) {
+                sumCars += vehichle.getHorsePower();
+                countCars++;
+            } else if (vehichle.getTypeOfVehicle().equals("truck")) {
+                sumTrucks += vehichle.getHorsePower();
+                countTrucks++;
+            }
+        }
+
+        double averagePowerCars = sumCars / countCars;
+
+        if (countCars == 0) {
+            averagePowerCars = 0;
+        }
+        System.out.printf("Cars have average horsepower of: %.2f.%n", averagePowerCars);
+
+        double averagePowerTrucks = sumTrucks / countTrucks;
+
+        if (countTrucks == 0) {
+            averagePowerTrucks = 0;
+        }
+        System.out.printf("Trucks have average horsepower of: %.2f.%n", averagePowerTrucks);
+    }
+}
