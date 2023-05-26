@@ -1,0 +1,49 @@
+package AssociativeArraysEXERCISE;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class P03Orders {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        Map<String, Double> ordersMap = new LinkedHashMap<>();
+        Map<String, Integer> rememberedProducts = new LinkedHashMap<>();
+
+        String inputLine = scanner.nextLine();
+
+        while (!inputLine.equals("buy")) {
+            String currentProduct = inputLine.split("\\s+")[0];
+            double price = Double.parseDouble(inputLine.split("\\s+")[1]);
+            int quantity = Integer.parseInt(inputLine.split("\\s+")[2]);
+
+            if (!ordersMap.containsKey(currentProduct)) {
+                // щом даденият продукт (Key) го няма -> добавяме го в МАП-а заедно с общата цена (Value) -> (quantity * price)
+                ordersMap.put(currentProduct, quantity * price);
+                // запаметяваме дадения продукт (Key) с първоначалното му количество (Value)
+                rememberedProducts.put(currentProduct, quantity);
+
+            } else {
+                // ако даденият продукт (Key) вече го има -> презаписваме продукта с добавеното количество (Value)
+                rememberedProducts.put(currentProduct, rememberedProducts.get(currentProduct) + quantity);
+                // след като имаме дадения продукт (Key) с НОВОТО количествно в МАП-а -> презаписваме го с новата цена (Value)
+                ordersMap.put(currentProduct, rememberedProducts.get(currentProduct) * price);
+
+            }
+
+
+            inputLine = scanner.nextLine();
+        }
+
+        for (Map.Entry<String, Double> entry : ordersMap.entrySet()) {
+            System.out.printf("%s -> %.2f%n", entry.getKey(), entry.getValue());
+
+            // ordersMap.forEach(entry ->
+            // System.out.println(String.format("%s -> %.2f", entry.getKey(), entry.getValue()));
+
+        }
+
+    }
+}
