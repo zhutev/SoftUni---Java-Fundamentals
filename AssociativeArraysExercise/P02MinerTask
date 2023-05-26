@@ -1,0 +1,39 @@
+package AssociativeArraysEXERCISE;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class P02MinerTask {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String inputLine = scanner.nextLine();
+
+        int count = 0;
+
+        Map<String, Integer> resultMap = new LinkedHashMap<>();
+
+        String currentResource = "";
+        int currentQuantity = 0;
+
+        while (!inputLine.equals("stop")) {
+            count++;
+
+            if (count % 2 != 0) {
+                currentResource = inputLine;
+                resultMap.putIfAbsent(currentResource, 0);
+
+            } else {
+                if (resultMap.containsKey(currentResource)) {
+                    currentQuantity = Integer.parseInt(inputLine);
+                    resultMap.put(currentResource, resultMap.get(currentResource) + currentQuantity);
+                }
+            }
+
+            inputLine = scanner.nextLine();
+        }
+
+        resultMap.entrySet().forEach(entry -> System.out.println(entry.getKey() + " -> " + entry.getValue()));
+    }
+}
