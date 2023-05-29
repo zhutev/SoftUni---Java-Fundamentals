@@ -1,0 +1,48 @@
+package AssociativeArraysEXERCISE;
+
+import java.util.*;
+
+public class P06StudentAcademy {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int numberOfStudents = Integer.parseInt(scanner.nextLine());
+
+        Map<String, List<Double>> allStudentsAndGrades = new LinkedHashMap<>();
+
+        for (int student = 1; student <= numberOfStudents; student++) {
+            String name = scanner.nextLine();
+            Double grade = Double.parseDouble(scanner.nextLine());
+
+            if (!allStudentsAndGrades.containsKey(name)) {
+                allStudentsAndGrades.put(name, new ArrayList<>());
+            }
+            allStudentsAndGrades.get(name).add(grade);
+
+        }
+
+        Map<String, Double> averageGrade = new LinkedHashMap<>();
+
+        for (Map.Entry<String, List<Double>> entry : allStudentsAndGrades.entrySet()) {
+            String currentStudent = entry.getKey();
+            List<Double> listOfGrades = entry.getValue();
+
+            double currentAvgGrade = getAverageGrade(listOfGrades);
+
+            if (currentAvgGrade >= 4.50) {
+                averageGrade.put(currentStudent, currentAvgGrade);
+            }
+        }
+
+        averageGrade.entrySet().forEach(entry -> System.out.printf("%s -> %.2f%n", entry.getKey(), entry.getValue()));
+    }
+
+    public static double getAverageGrade(List<Double> listOfGrades) {
+        double sumGrades = 0;
+        for (Double grade : listOfGrades) {
+            sumGrades += grade;
+
+        }
+        return sumGrades / listOfGrades.size();
+    }
+}
