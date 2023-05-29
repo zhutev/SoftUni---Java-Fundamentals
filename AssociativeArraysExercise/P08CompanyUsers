@@ -1,0 +1,44 @@
+package AssociativeArraysEXERCISE;
+
+import java.util.*;
+
+public class P08CompanyUsers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+
+        Map<String, List<String>> companyMap = new LinkedHashMap<>();
+
+        while (!input.equals("End")) {
+            String[] data = input.split("\\s+->\\s+");
+            String companyName = data[0];
+            String employeeID = data[1];
+
+            if (!companyMap.containsKey(companyName)) {
+                companyMap.put(companyName, new ArrayList<>());
+                companyMap.get(companyName).add(employeeID);
+            }
+
+            boolean isExisting = false;
+
+            for (List<String> listOfEmployees : companyMap.values()) {
+                if (listOfEmployees.contains(employeeID)) {
+                    isExisting = true;
+                    break;
+                }
+            }
+            if (!isExisting) {
+                companyMap.get(companyName).add(employeeID);
+            }
+
+            input = scanner.nextLine();
+        }
+
+        for (Map.Entry<String, List<String>> entry : companyMap.entrySet()) {
+            System.out.println(entry.getKey());
+            entry.getValue().forEach(employee -> System.out.printf("-- %s%n", employee));
+        }
+
+    }
+}
