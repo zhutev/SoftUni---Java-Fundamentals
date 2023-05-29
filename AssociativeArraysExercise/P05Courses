@@ -1,0 +1,32 @@
+package AssociativeArraysEXERCISE;
+
+import java.util.*;
+
+public class P05Courses {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        Map<String, List<String>> courseInfoMap = new LinkedHashMap<>();
+
+        String inputLine = scanner.nextLine();
+        while (!inputLine.equals("end")) {
+            String courseName = inputLine.split("\\s+:")[0];
+            String studentName = inputLine.split("\\s+:")[1];
+
+            if (!courseInfoMap.containsKey(courseName)) {
+                courseInfoMap.put(courseName, new ArrayList<>());
+                courseInfoMap.get(courseName).add(studentName);
+            } else {
+                courseInfoMap.get(courseName).add(studentName);
+            }
+
+
+            inputLine = scanner.nextLine();
+        }
+
+        for (Map.Entry<String, List<String>> entry : courseInfoMap.entrySet()) {
+            System.out.printf("%s: %d%n", entry.getKey(), entry.getValue().size());
+            entry.getValue().forEach(person -> System.out.printf("--%s%n", person));
+        }
+    }
+}
