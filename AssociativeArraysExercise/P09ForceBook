@@ -1,0 +1,71 @@
+package AssociativeArraysEXERCISE;
+
+import java.util.*;
+
+public class P09ForceBook {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String command = scanner.nextLine();
+
+        Map<String, List<String>> map = new LinkedHashMap<>();
+
+        while (!command.equals("Lumpawaroo")) {
+            if (command.contains(" | ")) {
+                String forceSide = command.split("\\s+\\|\\s+")[0];
+                String user = command.split("\\s+\\|\\s+")[1];
+
+                // 1. проверяваме дали нямаме такава група
+                if (!map.containsKey(forceSide)) {
+                    map.put(forceSide, new ArrayList<>());
+                }
+
+                // 2. имаме такава група -> добавяме към групата user-a, ако го няма в НИКОЯ ГРУПА
+                boolean isExistingUser = false;
+
+                for (List<String> userList : map.values()) {
+                    if (userList.contains(user)) {
+                        isExistingUser = true;
+                        break;
+                    }
+                }
+
+                // user го няма в никоя група
+                if (!isExistingUser) {
+                    map.get(forceSide).add(user);
+                }
+
+
+            } else if (command.contains(" -> ")) {
+                String user = command.split("\\s+->\\s+")[0];
+                String forceSide = command.split("\\s+->\\s+")[1];
+
+                // проверяваме дали дадения user го има в дадена група
+                // и го премахваме от текущата група, за да го преместим!
+                map.entrySet().forEach(entry -> entry.getValue().remove(user));
+
+                // проверяваме дали вече има такава група, в която отива.
+                if (map.containsKey(forceSide)) {
+                    map.get(forceSide).add(user);
+                } else {
+                    // няма група с такова име в която да отиде -> следователно създаваме нова и го добавяме там.
+                    map.put(forceSide, new ArrayList<>());
+                    map.get(forceSide).add(user);
+                }
+
+                System.out.printf("%s joins the %s side!%n", user, forceSide);
+
+            }
+            command = scanner.nextLine();
+
+        }
+
+        // вземам от списъка със записи всеки Лист/Value и филтрирам/оставям тези които имат 1 или повече записи.
+        map.entrySet().stream().filter(entry -> entry.getValue().size() > 0)
+                .forEach(entry -> {
+                    System.out.printf("Side: %s, Members: %s%n", entry.getKey(), entry.getValue().size());
+                    entry.getValue().forEach(user -> System.out.println("! " + user));
+                });
+
+    }
+}
