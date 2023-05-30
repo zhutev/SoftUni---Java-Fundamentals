@@ -1,0 +1,56 @@
+package AssociativeArraysEXERCISE;
+
+import java.util.*;
+
+public class P10SoftUniExamResults {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // You will be receiving lines in the following format:
+        // "{username}-{language}-{points}" until you receive "exam finished".
+        // for example : Peter-Java-84
+
+        Map<String, Integer> userAndPoints = new LinkedHashMap<>();
+        Map<String, Integer> languageCount = new LinkedHashMap<>();
+
+        String command = scanner.nextLine();
+        while (!command.equals("exam finished")) {
+            String[] data = command.split("-");
+            String username = data[0];
+
+            if (command.contains("banned")) {
+                userAndPoints.remove(username);
+
+            } else {
+                String language = data[1];
+                int points = Integer.parseInt(data[2]);
+
+                if (!userAndPoints.containsKey(username)) {
+                    userAndPoints.put(username, points);
+                } else {
+                    int currentPoints = userAndPoints.get(username);
+                    if (points > currentPoints) {
+                        userAndPoints.put(username, points);
+                    }
+                }
+
+                if (!languageCount.containsKey(language)) {
+                    languageCount.put(language, 1);
+                } else {
+                    int currentValue = languageCount.get(language);
+                    languageCount.put(language, currentValue + 1);
+
+                }
+            }
+
+            command = scanner.nextLine();
+        }
+
+        System.out.println("Results:");
+        userAndPoints.entrySet().forEach(entry -> System.out.println(entry.getKey() + " | " + entry.getValue()));
+
+        System.out.println("Submissions:");
+        languageCount.entrySet().
+                forEach(language -> System.out.printf("%s - %d%n", language.getKey(), language.getValue()));
+    }
+}
