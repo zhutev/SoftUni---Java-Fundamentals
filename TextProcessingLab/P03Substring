@@ -1,0 +1,23 @@
+package TextProcessingLAB;
+
+import java.util.Scanner;
+
+public class P03Substring {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String wordToRemove = scanner.nextLine();
+        String text = scanner.nextLine();
+
+        int indexOfWord = text.indexOf(wordToRemove);
+
+        // while (text.contains(wordToRemove) or :
+        while (indexOfWord != -1) {
+            text = text.replace(wordToRemove, "");
+            indexOfWord = text.indexOf(wordToRemove);
+
+        }
+
+        System.out.println(text);
+    }
+}
