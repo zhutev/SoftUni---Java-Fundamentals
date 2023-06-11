@@ -1,0 +1,26 @@
+package TextProcessingLAB;
+
+import java.util.Scanner;
+
+public class P01ReverseStrings {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String inputLine = scanner.nextLine();
+
+        while (!inputLine.equals("end")) {
+            String currentWord = inputLine;
+
+            String result = "";
+
+            for (int i = currentWord.length() - 1; i >= 0 ; i--) {
+                 char currentSymbol = currentWord.charAt(i);
+                 result += currentSymbol;
+            }
+
+            System.out.printf("%s = %s%n", currentWord, result);
+
+            inputLine = scanner.nextLine();
+        }
+    }
+}
