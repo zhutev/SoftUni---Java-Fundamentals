@@ -1,0 +1,37 @@
+package TextProcessingLAB;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class P02RepeatStrings {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] wordsArr = scanner.nextLine().split(" ");
+
+        String result = "";
+
+        List<String> resultList = new ArrayList<>();
+
+        for (int i = 0; i < wordsArr.length; i++) {
+            String currentWord = wordsArr[i];
+            int currentLength = wordsArr[i].length();
+
+            result = repeatWord(currentWord, currentLength);
+
+            resultList.add(result);
+
+        }
+
+        System.out.println(String.join("", resultList));
+    }
+
+    public static String repeatWord (String word, int length) {
+        String result = "";
+        for (int i = 0; i < word.length(); i++) {
+            result += word;
+        }
+        return result;
+    }
+}
