@@ -1,0 +1,34 @@
+package TextProcessingLAB;
+
+import java.util.Scanner;
+
+public class P05DigitsLettersAndOther {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String inputLine = scanner.nextLine();
+
+        StringBuilder lettersSB = new StringBuilder();
+        StringBuilder digitsSB = new StringBuilder();
+        StringBuilder otherSB = new StringBuilder();
+
+        for (int i = 0; i < inputLine.length(); i++) {
+            char currentSymbol = inputLine.charAt(i);
+
+            if (Character.isDigit(currentSymbol)) {
+                digitsSB.append(currentSymbol);
+
+            } else if (Character.isLetter(currentSymbol)) {
+                lettersSB.append(currentSymbol);
+
+            } else {
+                otherSB.append(currentSymbol);
+
+            }
+        }
+
+        System.out.println(digitsSB);
+        System.out.println(lettersSB);
+        System.out.println(otherSB);
+    }
+}
