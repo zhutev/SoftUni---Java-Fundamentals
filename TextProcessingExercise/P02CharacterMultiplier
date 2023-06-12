@@ -1,0 +1,54 @@
+package TextProcessingExercise;
+
+import java.util.Scanner;
+
+public class P02CharacterMultiplier {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] inputLine = scanner.nextLine().split("\\s+");
+
+        String currentWord = inputLine[0];
+        String nextWord = inputLine[1];
+
+        long sum = calculateSum(currentWord, nextWord);
+
+        System.out.println(sum);
+
+    }
+
+
+    public static long calculateSum(String firstWord, String secondWord) {
+        char[] firstArr = firstWord.toCharArray();
+        char[] secondArr = secondWord.toCharArray();
+
+        long sum = 0;
+
+        int minLength = Math.min(firstArr.length, secondArr.length);
+        int maxLenght = Math.max(firstArr.length, secondArr.length);
+
+        for (int i = 0; i < minLength; i++) {
+
+            sum += firstArr[i] * secondArr[i];
+
+        }
+
+        if (maxLenght == firstArr.length) {
+
+            for (int i = minLength; i < maxLenght; i++) {
+
+                sum += firstArr[i];
+            }
+
+        } else {
+
+            for (int i = minLength; i < maxLenght; i++) {
+
+                sum += secondArr[i];
+
+            }
+        }
+
+        return sum;
+    }
+}
