@@ -1,0 +1,30 @@
+package TextProcessingExercise;
+
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class P03ExtractFile {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // C:\Internal\training-internal\Template.pptx
+        // TO :
+        // File name: Template
+        // File extension: pptx
+
+        String[] filePath = scanner.nextLine().split(("\\\\"));
+
+        String fullNameOfFile = filePath[filePath.length - 1];
+
+        String fileName = fullNameOfFile.split("\\.")[0];
+        String destination = fullNameOfFile.split("\\.")[1];
+
+
+        System.out.println("File name: " + fileName);
+        System.out.println("File extension: " + destination);
+
+
+
+    }
+}
