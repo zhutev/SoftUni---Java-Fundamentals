@@ -1,0 +1,28 @@
+package TextProcessingExercise;
+
+import java.util.Scanner;
+
+public class P06ReplaceRepeatingChars {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String text = scanner.nextLine();
+
+        StringBuilder textResult = new StringBuilder();
+
+        char firstOccurance = text.charAt(0);
+        textResult.append(firstOccurance);
+
+        for (int i = 0; i < text.length(); i++) {
+            char currentSymbol = text.charAt(i);
+
+            if (currentSymbol != firstOccurance) {
+                textResult.append(currentSymbol);
+                firstOccurance = currentSymbol;
+            }
+
+        }
+
+        System.out.println(textResult);
+    }
+}
