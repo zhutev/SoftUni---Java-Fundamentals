@@ -1,0 +1,23 @@
+package TextProcessingExercise;
+
+import java.util.Scanner;
+
+public class P04CaesarCipher {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String text = scanner.nextLine();
+        char[] textArray = text.toCharArray();
+
+        StringBuilder encryptedText = new StringBuilder();
+
+        for (int i = 0; i < textArray.length; i++) {
+            int currentValue = textArray[i] + 3;
+            encryptedText.append((char) currentValue);
+
+        }
+
+        System.out.println(encryptedText.toString());
+
+    }
+}
