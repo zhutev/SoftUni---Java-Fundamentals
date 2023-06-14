@@ -1,0 +1,64 @@
+package TextProcessingExercise;
+
+import java.util.Scanner;
+
+public class P08LettersChangeNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+        String[] inputData = input.split("\\s+");
+
+        double finalSum = 0;
+
+        for (String code : inputData ) {
+            // модифицирам числото във кода, който имам
+            double editedNumber = getEditedNumber(code);
+
+            // добавям модифицираното число към крайната сума
+            finalSum += editedNumber;
+
+        }
+
+        System.out.printf("%.2f", finalSum);
+
+
+    }
+
+    private static double getEditedNumber (String code) {
+        char firstLetter = code.charAt(0);
+        char secondLetter = code.charAt(code.length() - 1);
+
+        double number = Double.parseDouble(code // from currentCode - например: "A12b"
+                .replace(firstLetter, ' ') // removing the firstLetter " 12b"
+                .replace(secondLetter, ' ') // removing the secondLetter " 12 "
+                .trim()); // trimming the whitespace before and after the number -> "12" = 12.0 (като double число)
+
+        // проверяваме дали ПЪРВАТА буква е главна или малка:
+        if (Character.isUpperCase(firstLetter)) {
+            // главните букви(A-Z) в ASCII table са със стойности от 65 до 90
+            int letterPosition = (int) firstLetter - 64;
+            number /= letterPosition;
+
+        } else if (Character.isLowerCase(firstLetter)) {
+            // малките букви(a-z) в ASCII table са със стойности от 97 до 120
+            int letterPosition = (int) firstLetter - 96;
+            number *= letterPosition;
+        }
+
+        // проверяваме дали ВТОРАТА буква е главна или малка:
+        if (Character.isUpperCase(secondLetter)) {
+            // главните букви(A-Z) в ASCII table са със стойности от 65 до 90
+            int letterPosition = (int) secondLetter - 64;
+            number -= letterPosition;
+
+        } else if (Character.isLowerCase(secondLetter)) {
+            // малките букви(a-z) в ASCII table са със стойности от 97 до 120
+            int letterPosition = (int) secondLetter - 96;
+            number += letterPosition;
+        }
+
+        // накрая връщам модифицираното число след всички операции
+        return number;
+    }
+}
